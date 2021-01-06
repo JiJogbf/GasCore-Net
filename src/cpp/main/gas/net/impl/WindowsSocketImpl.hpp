@@ -11,6 +11,7 @@ namespace impl{
 class WindowsSocketImpl: public SocketImpl{
 private:
     SOCKET mHandle;
+    int port;
 public:
     WindowsSocketImpl();
     WindowsSocketImpl(SOCKET handle);
