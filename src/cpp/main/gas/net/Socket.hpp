@@ -1,6 +1,7 @@
 #pragma once
 
 #include <gas\types.hpp>
+#include <gas\Object.hpp>
 
 #include "SocketAddress.hpp"
 
@@ -11,11 +12,12 @@ namespace impl{
     class SocketImpl;
 }
 
-class Socket{
+class Socket: public Object{
     impl::SocketImpl* mImpl;
 public:
     Socket();
     ~Socket();
+    virtual void create();
     virtual void close();
     virtual void connect(SocketAddress& sockAddr);
     virtual void send(ByteArray& array);

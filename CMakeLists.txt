@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 3.16)
 set(CXX_STANDARD 17)
 
 aux_source_directory(src/cpp/main/gas/net NetMainSrc)
+aux_source_directory(src/cpp/main/gas/net/impl NetMainSrc)
 
 add_library(Net ${NetMainSrc})
 

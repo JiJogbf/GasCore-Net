@@ -1,17 +1,18 @@
 #include "Socket.hpp"
 
-
-#include "impl\SocketImpl.hpp"
+#include "impl\WindowsSocketImpl.hpp"
 
 namespace gas{
 namespace net{
 
-Socket::Socket(): mImpl(new impl::EmptySockImpl()){
-
-}
+Socket::Socket(): mImpl(new impl::WindowsSocketImpl()){}
 
 Socket::~Socket(){
     delete mImpl;
+}
+
+void Socket::create(){
+    mImpl->create();
 }
 
 void Socket::close(){
