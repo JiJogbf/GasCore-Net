@@ -12,9 +12,12 @@ namespace impl{
     class SocketImpl;
 }
 
+// @todo: adding getter  for ip-addres and port
+
 class Socket: public Object{
     impl::SocketImpl* mImpl;
 public:
+    Socket(impl::SocketImpl* newImpl);
     Socket();
     ~Socket();
     virtual void create();

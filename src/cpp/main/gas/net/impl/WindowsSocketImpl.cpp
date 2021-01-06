@@ -1,5 +1,7 @@
 #include "WindowsSocketImpl.hpp"
 
+#include "..\SocketException.hpp"
+
 #include <string>
 #include <windows.h>
 
@@ -7,23 +9,11 @@ namespace gas{
 namespace net{
 namespace impl{
 
-// @todo: move to public folder
-class WinSockException: public std::exception {
-private:
-    std::string message;
-public:
-    WinSockException(const char* message):
-        message(message)
-    {}
+WindowsSocketImpl::WindowsSocketImpl(): WindowsSocketImpl(INVALID_SOCKET){
 
-    const char* what() const noexcept override{
-        return message.c_str();
-    }
-};
-
-WindowsSocketImpl::WindowsSocketImpl(){
-    mHandle = INVALID_SOCKET;
 }
+
+WindowsSocketImpl::WindowsSocketImpl(SOCKET handle): mHandle(handle){}
 
 WindowsSocketImpl::~WindowsSocketImpl(){
     mHandle = INVALID_SOCKET;
@@ -32,7 +22,7 @@ WindowsSocketImpl::~WindowsSocketImpl(){
 void WindowsSocketImpl::create(){
     mHandle = socket(AF_INET, SOCK_STREAM, 0);
     if(INVALID_SOCKET == mHandle){
-        throw WinSockException("socket in invalid state!");
+        throw SockException("socket in invalid state!");
     }
 }
 
@@ -55,7 +45,7 @@ void WindowsSocketImpl::connect(SocketAddress& sockAddr){
 
     // Дальше выполняем соединение:
     if (SOCKET_ERROR == (::connect(mHandle, (sockaddr *) &addr, sizeof(addr)))){
-        throw WinSockException("Cant perform connect on socket!");
+        throw SockException("Cant perform connect on socket!");
     }
 }
 

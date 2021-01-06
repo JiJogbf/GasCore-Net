@@ -13,6 +13,7 @@ private:
     SOCKET mHandle;
 public:
     WindowsSocketImpl();
+    WindowsSocketImpl(SOCKET handle);
     ~WindowsSocketImpl();
     void close() override;
     void create() override;

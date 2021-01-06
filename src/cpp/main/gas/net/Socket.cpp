@@ -5,7 +5,9 @@
 namespace gas{
 namespace net{
 
-Socket::Socket(): mImpl(new impl::WindowsSocketImpl()){}
+Socket::Socket(): Socket(new impl::WindowsSocketImpl()){}
+
+Socket::Socket(impl::SocketImpl* newImpl): mImpl(newImpl){}
 
 Socket::~Socket(){
     delete mImpl;
