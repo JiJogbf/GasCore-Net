@@ -4,7 +4,7 @@
 
 int main(){
     gas::test::Logger* logger = new gas::test::FileLogger("result.log");
-    gas::test::Tester* tester;
+    gas::test::Tester* tester = new gas::test::Tester(logger);
     tester->run();
     delete tester;
     return 0;
